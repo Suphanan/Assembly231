@@ -1,0 +1,43 @@
+;SUPHANAN MUJARIN
+;580510640
+
+TITLE   PRINT
+.MODEL  SMALL
+.STACK  100H
+.CODE
+MAIN    PROC
+
+    MOV CX,0
+    MOV DL,80H
+    MOV AH,2
+WHILE:
+    INT 21H
+    MOV BL,DL
+    MOV DL,20H
+    INT 21H
+    MOV DL,BL
+    INC DL
+    INC CX
+    CMP DL,0FFH
+    JE END_WHILE
+    CMP CX,10
+    JE SUB_
+    JMP WHILE
+SUB_:
+    MOV BL,DL
+    MOV CX,0
+    MOV AH, 2
+    MOV DL, 0DH
+    INT 21H
+    MOV DL,0AH
+    INT 21H
+    MOV DL,BL
+    JMP WHILE
+
+END_WHILE:
+    MOV AH, 4CH     
+    INT 21H   
+
+
+MAIN    ENDP
+    END MAIN   
